@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>找规律操作path中的d属性</title>
+</head>
+<body>
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+ viewBox="0 0 640 1136" enable-background="new 0 0 640 1136" xml:space="preserve">
+    <path id="path" fill-opacity="0.2" d="M640.5,300.5c-36,0-221.2-0.1-235.5-0.1c-18.5,0-29.6-15.9-29.5-30.7c0-14,12.3-29.9,29.5-29.9c13.9,0,198.2,0,235.4,0L640.5,300.5z"/>
+</svg>
+<script>
+    window.onload = function(){
+        var path = document.querySelector('#path');
+
+        setTimeout(function(){
+            path.setAttribute('d',computeLen(path,20,-1));
+        },2000);
+
+        //重新计算当前形状path的水平区域的宽度
+        function  computeLen(path,num,tag) {
+            var indexArr = [2,4,6,8,10,12,15,17,20,22];//特定值不能修改
+            var d = path.getAttribute('d');
+            var arr = d.split('-');
+            var finalArr = [];
+            var rect = path.getBoundingClientRect();
+            var curLen = rect.width;
+            var percent = (curLen+tag*num)*1.0/curLen;
+            for(var i=0;i<arr.length;i++){
+                var temp = arr[i].split(',');
+                finalArr.push(temp);
+            }
+            //计算并计算
+            var newD = '';
+            var index = 0;
+            var total = 0;
+            var target = indexArr[index];
+            for(var i=0;i<finalArr.length;i++){
+                var tempArr = finalArr[i];
+                var tempD = '';
+                for(var j=0;j<tempArr.length;j++){
+                    if(target===total){
+                        tempArr[j] = parseFloat(tempArr[j])*percent;
+                        index++;
+                        target = indexArr[index];
+                    }
+                    if(j!=tempArr.length-1){
+                        tempD += tempArr[j]+',';
+                    }else{
+                        tempD += tempArr[j];
+                    }
+                    total++;
+                }
+                if(i!=finalArr.length-1){
+                    newD += tempD+'-';
+                }else{
+                    newD += tempD;
+                }
+            }
+            return newD;
+        }
+    }
+</script>
+</body>
+</html>
