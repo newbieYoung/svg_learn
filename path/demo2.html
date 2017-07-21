@@ -27,6 +27,7 @@
         function  computeLen(path,num,tag) {
             var indexArr = [2,4,6,8,10,12,15,17,20,22];//特定值不能修改
             var d = path.getAttribute('d');
+            //先用负号划分，再用逗号划分，之所分开划分主要是因为到时候还要还原
             var arr = d.split('-');
             var finalArr = [];
             var rect = path.getBoundingClientRect();
