@@ -18,53 +18,24 @@
      */
     window.onload = function(){
         var path = document.querySelector('#path');
+        var d = path.getAttribute('d');
 
         setTimeout(function(){
-            path.setAttribute('d',computeLen(path,20,-1));
+            path.setAttribute('d',computeLen(100,-1));
         },2000);
 
-        //重新计算当前形状path的水平区域的宽度
-        function  computeLen(path,num,tag) {
-            var indexArr = [2,4,6,8,10,12,15,17,20,22];//特定值不能修改
-            var d = path.getAttribute('d');
-            //先用负号划分，再用逗号划分，之所分开划分主要是因为到时候还要还原
-            var arr = d.split('-');
-            var finalArr = [];
-            var rect = path.getBoundingClientRect();
-            var curLen = rect.width;
-            var percent = (curLen+tag*num)*1.0/curLen;
-            for(var i=0;i<arr.length;i++){
-                var temp = arr[i].split(',');
-                finalArr.push(temp);
-            }
-            //计算并拼接
-            var newD = '';
-            var index = 0;
-            var total = 0;
-            var target = indexArr[index];
-            for(var i=0;i<finalArr.length;i++){
-                var tempArr = finalArr[i];
-                var tempD = '';
-                for(var j=0;j<tempArr.length;j++){
-                    if(target===total){
-                        tempArr[j] = parseFloat(tempArr[j])*percent;
-                        index++;
-                        target = indexArr[index];
-                    }
-                    if(j!=tempArr.length-1){
-                        tempD += tempArr[j]+',';
-                    }else{
-                        tempD += tempArr[j];
-                    }
-                    total++;
-                }
-                if(i!=finalArr.length-1){
-                    newD += tempD+'-';
-                }else{
-                    newD += tempD;
-                }
-            }
-            return newD;
+        /**
+         * 第一个贝塞尔曲线和最后一个贝塞尔曲线表示的该路径中的直线水平区域；
+         * 且因为是用相对坐标的三次贝塞尔曲线表示直线；
+         * 因此只需要改变第一个贝塞尔曲线和第三个贝塞尔曲线的终点坐标的X值即可。
+         * @param num
+         * @param tag
+         */
+        function  computeLen(num,tag) {
+            var firstX = -235.5;
+            var lastX = 235.4;
+
+            return 'M640.5,300.5c-36,0-221.2-0.1'+(firstX-num*tag)+'-0.1c-18.5,0-29.6-15.9-29.5-30.7c0-14,12.3-29.9,29.5-29.9c13.9,0,198.2,0,'+(lastX+num*tag)+',0L640.5,300.5z';
         }
     }
 </script>
