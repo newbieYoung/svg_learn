@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>元素沿路径运动动画</title>
+</head>
+<body>
+<svg width="750px" height="3400px" viewBox="0 0 750 3400" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="#979797" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path id="motion-path" d="M619,2404s-265.29-68-385.29-234-232.9-497.73-16-772C459.9,1091.76,375.89,356.68,375.89,356.68"></path>
+        <rect width="15" height="15" fill="hotpink" transform="translate(-7,-7)">
+            <animateMotion dur="5s" repeatCount="indefinite" rotate="auto" calcMode="linear" keyTimes="0;0.2;0.8;1" keyPoints="0;0.33;0.66;1">
+                <mpath xlink:href="#motion-path" />
+            </animateMotion>
+        </rect>
+    </g>
+</svg>
+<script>
+    //M147,2493c0,0,258-157,378-323s232.9-497.7,16-772C298.8,1091.8,382.8,356.7,382.8,356.7
+    //M311,2538s94-202,214-368,232.9-497.73,16-772C298.81,1091.76,382.82,356.68,382.82,356.68
+    //M457,2438s-103.29-102-223.29-268-232.9-497.73-16-772C459.9,1091.76,375.89,356.68,375.89,356.68
+    //M619,2404s-265.29-68-385.29-234-232.9-497.73-16-772C459.9,1091.76,375.89,356.68,375.89,356.68
+</script>
+</body>
+</html>
