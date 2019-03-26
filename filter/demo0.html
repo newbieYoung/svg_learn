@@ -3,6 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>运动模糊</title>
+    <style>
+        .motion-blur{
+            width:165px;
+            height:165px;
+            border-radius:50%;
+            opacity: 0.62;
+            background-image: radial-gradient(circle at 50% 50%,#4185FC 35%, #0352DB 91%);
+            filter: url("#blur2");
+        }
+    </style>
 </head>
 <body>
     <svg>
@@ -13,5 +23,13 @@
         </defs>
         <rect x="30" y="30" width="70" height="70" fill="#ff4500" filter=url("#blur1") />
     </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="filters">
+        <defs>
+            <filter id="blur2">
+                <feGaussianBlur stdDeviation="11 0" />
+            </filter>
+        </defs>
+    </svg>
+    <div class="motion-blur"></div>
 </body>
 </html>
