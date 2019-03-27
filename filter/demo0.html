@@ -4,41 +4,41 @@
     <meta charset="UTF-8">
     <title>运动模糊</title>
     <style>
+        div{
+            display:inline-block;
+            margin-right:50px;
+        }
+        svg{
+            display:none;
+        }
         .demo0{
             width:165px;
             height:165px;
             border-radius:50%;
             opacity: 0.62;
             background-image: radial-gradient(circle at 50% 50%,#4185FC 35%, #0352DB 91%);
-            filter: url("#blur2");
+            filter: url("#blur3");
         }
         .demo1{
-            width:512px;
-            height:512px;
+            width:256px;
+            height:256px;
             background-image:url(../img/lena.jpg);
             background-size:100% 100%;
             background-repeat: no-repeat;
             filter: url("#blur2");
         }
         /* 模拟任意角度的动态模糊 */
-        .demo2{
-            width:512px;
-            height:512px;
+        .layer-reset{
+            width:256px;
+            height:256px;
             transform: rotate(-45deg);
         }
-        .demo2>div{
+        .layer-blur{
             width:100%;
             height:100%;
             filter: url("#blur2");
-            position: relative;
         }
-        .demo2>div:after{
-            content:'';
-            position: absolute;
-            top:0;
-            left:0;
-            right:0;
-            bottom:0;
+        .layer-img{
             width:100%;
             height:100%;
             background-image:url(../img/lena.jpg);
@@ -49,23 +49,22 @@
     </style>
 </head>
 <body>
-    <svg>
-        <defs>
-            <filter id="blur1" width="200" height="200" x="0" y="0" filterUnits="userSpaceOnUse" >
-                <feGaussianBlur stdDeviation="1 15"/>
-            </filter>
-        </defs>
-        <rect x="30" y="30" width="70" height="70" fill="#ff4500" filter=url("#blur1") />
-    </svg>
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="filters">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
         <defs>
             <filter id="blur2">
                 <feGaussianBlur stdDeviation="20 0" />
+            </filter>
+            <filter id="blur3">
+                <feGaussianBlur stdDeviation="11 0" />
             </filter>
         </defs>
     </svg>
     <div class="demo0"></div>
     <div class="demo1"></div>
-    <div class="demo2"><div></div></div>
+    <div class="layer-reset">
+        <div class="layer-blur">
+            <div class="layer-img"></div>
+        </div>
+    </div>
 </body>
 </html>
